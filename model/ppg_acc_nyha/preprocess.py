@@ -64,20 +64,20 @@ def main(
         raise BadSignalWarning from exc
 
     # calc hr entropy
-    try:
-        ppg_entropy_dict = calc_entropy(hr, prefix="ppg", dict_like=True)
-    except Exception as exc:
-        print("ppg entropy error: ", exc)
-        logger.warning(f"{'PPG Entropy error!'}, detail: {exc}")
-        raise EntropyError from exc
+    # try:
+    #     ppg_entropy_dict = calc_entropy(hr, prefix="ppg", dict_like=True)
+    # except Exception as exc:
+    #     print("ppg entropy error: ", exc)
+    #     logger.warning(f"{'PPG Entropy error!'}, detail: {exc}")
+    #     raise EntropyError from exc
 
-    # calc acc entropy
-    try:
-        acc_entropy_dict = calc_entropy(acc, prefix="acc", dict_like=True)
-    except Exception as exc:
-        print("acc entropy error: ", exc)
-        logger.warning(f"{'ACC Entropy error!'}, detail: {exc}")
-        raise EntropyError from exc
+    # # calc acc entropy
+    # try:
+    #     acc_entropy_dict = calc_entropy(acc, prefix="acc", dict_like=True)
+    # except Exception as exc:
+    #     print("acc entropy error: ", exc)
+    #     logger.warning(f"{'ACC Entropy error!'}, detail: {exc}")
+    #     raise EntropyError from exc
 
     # calc acc statistics
     try:
@@ -92,8 +92,8 @@ def main(
         data = init_data()
         data['NYHA'] = nyha
         data.update(measures)
-        data.update(ppg_entropy_dict)
-        data.update(acc_entropy_dict)
+        # data.update(ppg_entropy_dict)
+        # data.update(acc_entropy_dict)
         data.update(acc_stats_dict)
 
     except Exception as exc:
