@@ -1,0 +1,56 @@
+name: Heart_Failure CICD
+permissions: write-all
+# 觸發條件
+on:
+  push:
+    branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
+ 
+# 執行一項或多項任務
+jobs:
+  build:
+    runs-on: [self-hosted, Windows, X64]
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.7]
+ 
+    steps:
+    - uses: actions/checkout@v3
+#       with:
+#         token: ${{ secrets.GH_TOKEN_TEST }}
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+ 
+    # 建立環境
+    - name: create env
+      run: |
+        cd C:\Users\oplab\Desktop\Dan\oplab_CICD
+        conda activate Dan
+        git pull https://github.com/DanHuang929/oplab_CICD.git
+    - name: Install Dependencies
+      run: |
+        cd C:\Users\oplab\Desktop\Dan\oplab_CICD
+#        python -m pip install --upgrade pip
+#        pip install -r requirements.txt
+    - name: Infernece
+      run : |
+        cd C:\Users\oplab\Desktop\Dan\oplab_CICD
+        python inference.py
+    - name: commit
+      run: |
+          cd  C:\Users\oplab\Desktop\Dan\oplab_CICD
+          git config --local user.email "dan89092989@github.com"
+          git config --local user.name "DanHuang929"
+          git add result.csv
+          git commit -m "inference"
+          git push origin main
+
+#     - name: Push changes
+#       uses: ad-m/github-push-action@master
+#       with:
+#         github_token: ${{ secrets.GH_TOKEN_TEST }}
+#         branch: main
