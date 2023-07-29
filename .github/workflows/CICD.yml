@@ -30,7 +30,7 @@ jobs:
       run: |
         cd C:\Users\oplab\Desktop\Dan\oplab_CICD
         conda activate Dan
-#        git pull https://github.com/DanHuang929/oplab_CICD.git
+        git pull https://github.com/DanHuang929/oplab_CICD.git
     - name: Install Dependencies
       run: |
         cd C:\Users\oplab\Desktop\Dan\oplab_CICD
